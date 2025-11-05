@@ -1,0 +1,6 @@
+.idea/
+uptime-kuma/data
+config.env
+nohup.out
+*.swp
+logs

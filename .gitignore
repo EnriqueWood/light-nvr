@@ -1,0 +1,5 @@
+.idea/
+config.env
+nohup.out
+*.swp
+logs

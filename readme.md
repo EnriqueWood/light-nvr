@@ -26,7 +26,17 @@ You'll need these tools installed:
 - `jq` - JSON parsing
 - `bash` - obviously
 
-**Debian/Ubuntu:**
+### Quick install
+
+```bash
+./install.sh
+```
+
+The install script detects your distro and installs all dependencies automatically. Supports Debian, Ubuntu, Arch, Manjaro, Fedora, RHEL, CentOS, and openSUSE.
+
+### Manual install
+
+**Debian/Ubuntu/Mint:**
 ```bash
 sudo apt update && sudo apt install mpv ffmpeg socat xdotool wmctrl lsof jq
 ```
@@ -43,7 +53,7 @@ sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-rele
 sudo dnf install mpv ffmpeg socat xdotool wmctrl lsof jq
 ```
 
-**RHEL/CentOS:**
+**RHEL/CentOS/Rocky/AlmaLinux:**
 ```bash
 # Enable EPEL and RPM Fusion
 sudo dnf install epel-release

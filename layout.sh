@@ -8,6 +8,17 @@ LAYOUTS_DIR="$HOME/.light-nvr/layouts"
 declare -a mpv_pids=()
 declare -a sockets=()
 
+if [ "${XDG_SESSION_TYPE:-}" = "wayland" ]; then
+    echo "Error: Layout functionality requires X11"
+    echo "Wayland support is planned but not yet implemented."
+    echo
+    echo "To use this script on Wayland:"
+    echo "  1. Start your streams with main.sh (leave LAYOUT unset in config.env)"
+    echo "  2. Position windows manually"
+    echo
+    exit 1
+fi
+
 cleanup() {
     for pid in "${mpv_pids[@]}"; do
         if kill -0 "$pid" 2>/dev/null; then

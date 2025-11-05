@@ -3,6 +3,13 @@
 A lightweight NVR solution for managing multiple camera streams using mpv on Linux. Built for efficiency and ease of use.
 The software is specifically designed to be lightweight and optimized for Linux.
 
+## ⚠️ Note: Layout support is X11 only (for now)
+
+The layout functionality (`layout.sh` and `LAYOUT` config) requires X11 and will not work on Wayland.
+Streams will still work on Wayland, but you'll need to position windows manually.
+
+**Wayland support is being developed on the `wayland-support` branch for testing.**
+
 ## Features
 
 - **Custom layouts** - Save and restore window positions for your camera streams
@@ -98,18 +105,29 @@ Why use names?
 
 **Important**: Stream names must be unique.
 
-### 3. Create a layout
+### 3. Create a layout (optional, X11 only)
+
+If you want to save specific window positions:
 
 ```bash
 ./layout.sh
 ```
 
-Enter a name, specify how many windows you want, arrange them on screen, then press Enter to save. Layouts are stored in `~/.light-nvr/layouts/`.
+Enter a name (e.g., `my-cameras`), specify how many windows, arrange them on screen, then press Enter to save. Layouts are stored in `~/.light-nvr/layouts/`.
 
-To restore a saved layout:
+To use this layout, set it in `config.env`:
 ```bash
-./layout.sh <layout_name>
+export LAYOUT=my-cameras
 ```
+
+Or test it manually:
+```bash
+./layout.sh my-cameras
+```
+
+If `LAYOUT` is not set in config.env, streams will use auto-calculated positions based on `BASE_SCREEN_WIDTH` and `BASE_SCREEN_HEIGHT`.
+
+**Note:** See the X11 requirement notice at the top of this README. Wayland support is being tested on the `wayland-support` branch.
 
 ### 4. Start watching
 

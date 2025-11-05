@@ -138,6 +138,32 @@ while true; do
       local url=$(get_url_by_index "$i")
       log_info "  Stream $i: '$name' -> $(sanitize_url "$url")"
     done
+
+    if [ -n "${LAYOUT:-}" ]; then
+      if [ -n "${WAYLAND_DISPLAY:-}" ] || [ "${XDG_SESSION_TYPE:-}" = "wayland" ]; then
+        echo ""
+        echo "=========================================="
+        echo "WARNING: Wayland Detected"
+        echo "=========================================="
+        echo "You have LAYOUT='$LAYOUT' set in your config,"
+        echo "but you are running on Wayland."
+        echo ""
+        echo "Layout functionality requires X11 and will NOT work on Wayland."
+        echo "Windows will appear but positioning will not be applied."
+        echo ""
+        echo "Wayland support is being developed on the 'wayland-support' branch."
+        echo ""
+        echo "To fix this:"
+        echo "  - Unset LAYOUT in config.env to disable this warning"
+        echo "  - Switch to X11 session if you need layout support"
+        echo "  - Position windows manually after they spawn"
+        echo "=========================================="
+        echo ""
+        read -p "Press ENTER to continue anyway, or Ctrl+C to abort..."
+        echo ""
+        log_warning "User chose to continue with LAYOUT set on Wayland"
+      fi
+    fi
   fi
 
   source "$SCRIPT_DIR/calculate_geometries.sh"
